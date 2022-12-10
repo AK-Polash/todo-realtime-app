@@ -5,14 +5,14 @@ import Heading from "./Heading";
 import TodoPost from "./TodoPost";
 import TodoPostItem from "./TodoPostItem";
 
-const TodosArea = () => {
+const TodosArea = ({ title, task }) => {
   return (
     <>
       <div className="flex flex-col items-center gap-x-[30px]">
         <div className="w-[500px] mx-auto py-[10px] px-[20px] rounded-[10px] bg-gradient-to-r from-primary to-secondary">
           <div className="pt-[20px]">
             <Heading
-              title="Heading"
+              title={title}
               className="text-[32px] font-bold text-pure font-dm text-center"
             />
           </div>
@@ -20,7 +20,7 @@ const TodosArea = () => {
           <TodoPost className="font-dm">
             <TodoPostItem
               className="text-pure py-[40px] text-center"
-              post="hey there"
+              post={task}
             />
           </TodoPost>
 
