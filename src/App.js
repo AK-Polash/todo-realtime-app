@@ -1,9 +1,14 @@
 import React from "react";
+import InputArea from "./components/InputArea";
+import TodosArea from "./components/TodosArea";
 
 function App() {
   return (
     <>
-      <h1 className="text-3xl font-dm font-bold text-rare">Hello world!</h1>
+      <div className="w-full h-screen bg-flat">
+        <InputArea />
+        <TodosArea />
+      </div>
     </>
   );
 }
