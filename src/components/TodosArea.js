@@ -5,7 +5,7 @@ import Heading from "./Heading";
 import TodoPost from "./TodoPost";
 import TodoPostItem from "./TodoPostItem";
 
-const TodosArea = ({ title, task }) => {
+const TodosArea = ({ title, task, handleDelete, handleEdit, handleShare }) => {
   return (
     <>
       <div className="w-[500px] mx-auto py-[10px] px-[20px] rounded-[10px] bg-gradient-to-r from-primary to-secondary">
@@ -27,14 +27,17 @@ const TodosArea = ({ title, task }) => {
           <ButtonItem
             title="Delete"
             className="w-[100px] py-[6px] text-dark bg-rapid rounded"
+            onClick={handleDelete}
           />
           <ButtonItem
             title="Edit"
             className="w-[100px] py-[6px] text-dark bg-rapid rounded"
+            onClick={handleEdit}
           />
           <ButtonItem
             title="Share"
             className="w-[100px] py-[6px] text-dark bg-rapid rounded"
+            onClick={handleShare}
           />
         </Buttons>
       </div>
