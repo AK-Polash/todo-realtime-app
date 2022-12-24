@@ -36,7 +36,7 @@ function App() {
         todoTask: task,
       })
         .then(() => {
-          console.log("kaj hoise");
+          console.log("Add hoise");
         })
         .catch((error) => {
           console.log("Error: ", error);
@@ -60,7 +60,9 @@ function App() {
 
   // Handle buttons:
   let handleDelete = (id) => {
-    remove(ref(db, "Todos/" + id));
+    remove(ref(db, "Todos/" + id))
+      .then(() => console.log("Delete hoise"))
+      .catch((error) => console.log("Error: ", error));
   };
 
   let handleEdit = (id) => {
