@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import InputArea from "./components/InputArea";
 import TodosArea from "./components/TodosArea";
 import {
@@ -17,6 +17,8 @@ function App() {
   let [errorMsg, setErrorMsg] = useState("");
   let [todo, setTodo] = useState([]);
   let [show, setShow] = useState(false);
+  let titleInputRef = useRef();
+  let taskInputRef = useRef();
   let db = getDatabase();
 
   let handleInputTitle = (e) => {
@@ -45,6 +47,8 @@ function App() {
         });
 
       setErrorMsg("");
+      titleInputRef.current.value = "";
+      taskInputRef.current.value = "";
     }
   };
 
@@ -98,6 +102,8 @@ function App() {
           handleSubmit={handleSubmit}
           handleUpdate={handleUpdate}
           show={show}
+          titleInputRef={titleInputRef}
+          taskInputRef={taskInputRef}
         />
 
         <div className="text-center text-red-500 font-dm font-bold text-2xl py-4">

@@ -8,6 +8,8 @@ const InputArea = ({
   handleSubmit,
   handleUpdate,
   show,
+  titleInputRef,
+  taskInputRef,
 }) => {
   return (
     <>
@@ -16,11 +18,13 @@ const InputArea = ({
           className="font-dm w-[360px] h-[54px] rounded-[50px] px-[40px] py-[10px] text-center transition-all duration-100 ease-linear border-2 border-rare focus-visible:outline-0 focus-visible:border-secondary focus-visible:w-[450px] "
           placeholder="enter todo title"
           onChange={handleInputTitle}
+          inputRef={titleInputRef}
         />
         <InputItem
           className="font-dm w-[360px] h-[54px] rounded-[50px] px-[40px] py-[10px] text-center transition-all duration-100 ease-linear border-2 border-rare focus-visible:outline-0 focus-visible:border-secondary focus-visible:w-[450px] "
           placeholder="enter your task"
           onChange={handleInputTask}
+          inputRef={taskInputRef}
         />
 
         {show ? (
