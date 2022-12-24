@@ -2,7 +2,13 @@ import React from "react";
 import ButtonItem from "./ButtonItem";
 import InputItem from "./InputItem";
 
-const InputArea = ({ handleInputTitle, handleInputTask, handleSubmit }) => {
+const InputArea = ({
+  handleInputTitle,
+  handleInputTask,
+  handleSubmit,
+  handleUpdate,
+  show,
+}) => {
   return (
     <>
       <div className="flex flex-col justify-center items-center gap-y-[8px] py-[15px] ">
@@ -17,12 +23,21 @@ const InputArea = ({ handleInputTitle, handleInputTask, handleSubmit }) => {
           onChange={handleInputTask}
         />
 
-        <ButtonItem
-          title="Add Todo"
-          className="bg-primary w-[200px] h-[48px] text-pure font-semibold text-center font-dm rounded-[50px] border-2 border-transparent transition-all ease-linear duration-200 hover:border-2 hover:border-secondary hover:text-secondary hover:bg-pure "
-          type="submit"
-          onClick={handleSubmit}
-        />
+        {show ? (
+          <ButtonItem
+            title="Update"
+            className="bg-primary w-[200px] h-[48px] text-pure font-semibold text-center font-dm rounded-[50px] border-2 border-transparent transition-all ease-linear duration-200 hover:border-2 hover:border-secondary hover:text-secondary hover:bg-pure "
+            type="submit"
+            onClick={handleUpdate}
+          />
+        ) : (
+          <ButtonItem
+            title="Add Todo"
+            className="bg-primary w-[200px] h-[48px] text-pure font-semibold text-center font-dm rounded-[50px] border-2 border-transparent transition-all ease-linear duration-200 hover:border-2 hover:border-secondary hover:text-secondary hover:bg-pure "
+            type="submit"
+            onClick={handleSubmit}
+          />
+        )}
       </div>
     </>
   );
