@@ -12,6 +12,7 @@ import {
 } from "firebase/database";
 
 function App() {
+  let db = getDatabase();
   let [title, setTitle] = useState("");
   let [task, setTask] = useState("");
   let [errorMsg, setErrorMsg] = useState("");
@@ -19,7 +20,6 @@ function App() {
   let [show, setShow] = useState(false);
   let titleInputRef = useRef();
   let taskInputRef = useRef();
-  let db = getDatabase();
   let [clickedId, setClickedId] = useState("");
 
   let handleInputTitle = (e) => {
@@ -48,6 +48,8 @@ function App() {
         });
 
       setErrorMsg("");
+      setTitle("");
+      setTask("");
       titleInputRef.current.value = "";
       taskInputRef.current.value = "";
     }
@@ -65,38 +67,52 @@ function App() {
     });
   }, []);
 
-  // Handle buttons:
+  // Handle Delete:
   let handleDelete = (id) => {
     remove(ref(db, "Todos/" + id))
       .then(() => console.log("Delete hoise"))
       .catch((error) => console.log("Error: ", error));
+
+    setShow(false);
+    titleInputRef.current.value = "";
+    taskInputRef.current.value = "";
+    setErrorMsg("");
   };
 
-  // eikhan theke id pass kore handleUpdate() e pass korte hobe..!
+  // Handle Edit:
   let handleEdit = (id, todoTitle, todoTask) => {
     setShow(true);
-
     setClickedId(id);
     titleInputRef.current.value = todoTitle;
     taskInputRef.current.value = todoTask;
   };
 
+  // Handle Share:
   let handleShare = (id) => {
     console.log(id);
   };
 
+  // Handle Update:
   let handleUpdate = () => {
-    setShow(!show);
+    if (!titleInputRef.current.value) {
+      setErrorMsg("naam nai");
+    } else if (!taskInputRef.current.value) {
+      setErrorMsg("kaj nai");
+    } else {
+      setShow(!show);
 
-    update(ref(db, "Todos/" + clickedId), {
-      todoTitle: title,
-      todoTask: task,
-    })
-      .then(() => console.log("Update hoise"))
-      .catch((error) => console.log("Error: ", error));
+      update(ref(db, "Todos/" + clickedId), {
+        todoTitle: titleInputRef.current.value,
+        todoTask: taskInputRef.current.value,
+      })
+        .then(() => console.log("Update hoise"))
+        .catch((error) => console.log("Error: ", error));
 
-    titleInputRef.current.value = "";
-    taskInputRef.current.value = "";
+      setTitle("");
+      setTask("");
+      titleInputRef.current.value = "";
+      taskInputRef.current.value = "";
+    }
   };
 
   return (
