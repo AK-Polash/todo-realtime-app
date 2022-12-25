@@ -20,6 +20,7 @@ function App() {
   let titleInputRef = useRef();
   let taskInputRef = useRef();
   let db = getDatabase();
+  let [clickedId, setClickedId] = useState("");
 
   let handleInputTitle = (e) => {
     setTitle(e.target.value);
@@ -71,26 +72,31 @@ function App() {
       .catch((error) => console.log("Error: ", error));
   };
 
-  // let passId;
-  let handleEdit = (id) => {
+  // eikhan theke id pass kore handleUpdate() e pass korte hobe..!
+  let handleEdit = (id, todoTitle, todoTask) => {
     setShow(true);
-    // handleUpdate(id);
-    // passId = id;
+
+    setClickedId(id);
+    titleInputRef.current.value = todoTitle;
+    taskInputRef.current.value = todoTask;
   };
 
   let handleShare = (id) => {
     console.log(id);
   };
 
-  let handleUpdate = (id) => {
+  let handleUpdate = () => {
     setShow(!show);
 
-    update(ref(db, "Todos/" + id), {
+    update(ref(db, "Todos/" + clickedId), {
       todoTitle: title,
       todoTask: task,
     })
       .then(() => console.log("Update hoise"))
       .catch((error) => console.log("Error: ", error));
+
+    titleInputRef.current.value = "";
+    taskInputRef.current.value = "";
   };
 
   return (
@@ -117,7 +123,9 @@ function App() {
               title={item.todoTitle}
               task={item.todoTask}
               handleDelete={() => handleDelete(item.id)}
-              handleEdit={() => handleEdit(item.id)}
+              handleEdit={() =>
+                handleEdit(item.id, item.todoTitle, item.todoTask)
+              }
               handleShare={() => handleShare(item.id)}
             />
           ))}
