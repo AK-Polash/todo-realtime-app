@@ -112,6 +112,7 @@ function App() {
       setTask("");
       titleInputRef.current.value = "";
       taskInputRef.current.value = "";
+      setErrorMsg("");
     }
   };
 
